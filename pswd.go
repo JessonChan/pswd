@@ -60,8 +60,5 @@ func password(list []rune, size int) (ps string) {
 		idx := rd.Intn(last)
 		list[last], list[idx] = list[idx], list[last]
 	}
-	for i := 0; i < size; i++ {
-		ps = ps + fmt.Sprintf("%c", list[i])
-	}
-	return
+	return string(list[0:size])
 }
