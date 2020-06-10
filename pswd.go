@@ -42,23 +42,19 @@ func main() {
 		for i := v.start; i < v.start+rune(v.size); i++ {
 			*v.chars = append(*(v.chars), i)
 		}
-		fmt.Println(v.chars)
 	}
 	if *symbolsFlag {
 		*symbols.chars = append(*symbols.chars, []rune(*userChars)...)
 	} else {
 		*symbols.chars = []rune(*userChars)
 	}
-	fmt.Println(*symbolsFlag,*userChars)
 
 	chars := append(*numbers.chars, append(*alphabets.chars, append(*capitalAlphabets.chars, *symbols.chars...)...)...)
-	fmt.Println(chars)
 	fmt.Println(password(chars, *passwordLength))
 }
 
 func password(list []rune, size int) (ps string) {
 	maxLen := len(list)
-	fmt.Println()
 	rd := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for i := 0; i < maxLen; i++ {
