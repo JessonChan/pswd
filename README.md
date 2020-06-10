@@ -5,4 +5,7 @@ Usage of ./pswd:
     	自定义字符  
   -l int  
     	密码长度 (default 8)  
-  -s true/false 是否使用特殊字符%、(、)、-、=、@
+  -s true/false 是否使用特殊字符%、(、)、-、=、@  
+
+pswd -l=12 -s=true -c="^_$#)+"
+
