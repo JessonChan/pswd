@@ -43,11 +43,10 @@ func main() {
 			*v.chars = append(*(v.chars), i)
 		}
 	}
-	if *symbolsFlag {
-		*symbols.chars = append(*symbols.chars, []rune(*userChars)...)
-	} else {
-		*symbols.chars = []rune(*userChars)
+	if *symbolsFlag == false {
+		*symbols.chars = []rune{}
 	}
+	*symbols.chars = append(*symbols.chars, []rune(*userChars)...)
 
 	chars := append(*numbers.chars, append(*alphabets.chars, append(*capitalAlphabets.chars, *symbols.chars...)...)...)
 	fmt.Println(password(chars, *passwordLength))
