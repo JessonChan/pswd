@@ -54,19 +54,11 @@ func main() {
 }
 
 func password(list []rune, size int) (ps string) {
-	maxLen := len(list)
 	rd := rand.New(rand.NewSource(time.Now().UnixNano()))
-
-	for i := 0; i < maxLen; i++ {
-		idx := maxLen - i - 1
-		if idx == 0 {
-			break
-		}
-		idx = i + 1 + rd.Intn(maxLen-i-1)
-		if idx >= maxLen {
-			break
-		}
-		list[i], list[idx] = list[idx], list[i]
+	for i := len(list); i > 1; i-- {
+		last := i - 1
+		idx := rd.Intn(last)
+		list[last], list[idx] = list[idx], list[last]
 	}
 	for i := 0; i < size; i++ {
 		ps = ps + fmt.Sprintf("%c", list[i])
