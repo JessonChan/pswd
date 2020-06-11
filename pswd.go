@@ -37,29 +37,20 @@ var symbolsFlag = flag.Bool("s", false, "是否使用特殊字符%、(、)、-�
 
 func main() {
 	flag.Parse()
-
 	for _, v := range []char{numbers, alphabets, capitalAlphabets} {
 		for i := v.start; i < v.start+rune(v.size); i++ {
 			*v.chars = append(*(v.chars), i)
 		}
 	}
-	if *symbolsFlag == false {
-		*symbols.chars = []rune{}
+	chars := append(*numbers.chars, append(*alphabets.chars, append(*capitalAlphabets.chars, append(func() []rune {
+		if *symbolsFlag {
+			return *symbols.chars
+		}
+		return []rune{}
+	}(), []rune(*userChars)...)...)...)...)
+	for *passwordLength > len(chars) {
+		chars = append(chars, chars...)
 	}
-	*symbols.chars = append(*symbols.chars, []rune(*userChars)...)
-
-	chars := append(*numbers.chars, append(*alphabets.chars, append(*capitalAlphabets.chars, *symbols.chars...)...)...)
-	fmt.Println(password(chars, *passwordLength))
-}
-
-func password(list []rune, size int) (ps string) {
-	for size > len(list) {
-		list = append(list, list...)
-	}
-	rd := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for i := 0; i < len(list)-1; i++ {
-		idx := i + 1 + rd.Intn(len(list)-i-1)
-		list[i], list[idx] = list[idx], list[i]
-	}
-	return string(list[0:size])
+	rand.New(rand.NewSource(time.Now().UnixNano())).Shuffle(len(chars), func(i, j int) { chars[i], chars[j] = chars[j], chars[i] })
+	fmt.Println(string(chars[0:*passwordLength]))
 }
