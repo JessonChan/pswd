@@ -53,6 +53,9 @@ func main() {
 }
 
 func password(list []rune, size int) (ps string) {
+	for size > len(list) {
+		list = append(list, list...)
+	}
 	rd := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < len(list)-1; i++ {
 		idx := i + 1 + rd.Intn(len(list)-i-1)
