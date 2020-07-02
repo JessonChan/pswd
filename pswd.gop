@@ -1,0 +1,4 @@
+#!/usr/bin/env qrun
+size:=16
+inc:=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+println(string([byte(v) for k,v <-[v for v <-{k:v for k,v <- [int(k)+x for x <- inc ,x<v  for k,v <-{'0':10,'a':26,'A':26}]}],k<size]))
