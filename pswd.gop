@@ -1,5 +1,5 @@
-#!/usr/bin/env qrun
+#!/usr/bin/env -S gop run
 import "os"
 import "strconv"
 
-println(string([byte(v) for k, v <- [v for v <- {k: v for k, v <- [int(k)+x for x <- [k for k, _ <- make([]int, 26)], x < v for k, v <- {'0': 10, 'a': 26, 'A': 26}]}], k < strconv.Atoi(append(os.Args,16)[2])?:16]))
+println(string([byte(v) for k, v <- [v for v <- {k: v for k, v <- [int(k)+x for x <- [k for k, _ <- make([]int, 26)], x < v for k, v <- {'0': 10, 'a': 26, 'A': 26}]}], k < strconv.Atoi(append(os.Args,"16")[2])?:16]))
